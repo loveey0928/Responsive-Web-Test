@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MakeYoutubePage</title>
     <link rel="stylesheet" href="Youtube.css" />
-    <link 
-        href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" 
-        rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital@0;1&family=Roboto:wght@500&display=swap" rel="stylesheet"/>
     <script src="https://kit.fontawesome.com/57be22e3ca.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <nav class="navbar">
         <div class="navbar_logo">
-            <i class="fab fa-youtube-square"></i>
+            <i class="fab fa-youtube"></i>
             <a href="#">Youtube</a> 
         </div>
 
@@ -24,28 +21,73 @@
         </div>
     </nav>
 
-    <div class="scene"></div>
-        <li class="class1"></li>
-        <li class="class2"></li>
-        <li class="class3"></li>
-    </div>
+    <section class="scene">
+        <!-- <video autoplay loop controls src="Video/Transmission Electron Microscopy.mp4"></video> -->
+    </section>
+     
+    <section class="detail">
+      <div>
+          <ul class="hashtag">
+            <li class="list1">#electron</li>
+            <li class="list2">#SEM</li>
+            <li class="list3">#image</li>
+        </ul>
+        <div class="detail_Title">SEM을 이용한 이미지 측정 원리</div>
+        <button class="detail_moreBtn"><i class="fas fa-caret-down"></i></button>
+        <ul class="detail_viewNum">
+            <li>조회수 10535회</li>
+            <li>2020. 3.14</li>  
+        </ul>
+        <ul class="detail_goodBadEtcBtn">
+            <li><i class="far fa-thumbs-up"></i><span>386</span></li>
+            <li><i class="far fa-thumbs-down"></i><span>5</span></li>
+            <li><i class="fas fa-share"></i><span>share</span></li>
+            <li><i class="fas fa-archive"></i><span>저장</span></li>
+            <li><i class="fas fa-ellipsis-h"></i></li>
+        </ul>
+        <div class="detail_myNameAndSubscribe">
+            <img height="50px"   src="image/forest.png" alt="">
+            <un>
+                <li>DBase</li>
+                <li>구독자 1M</li>
+            </un>
+            <button>Subscribe</button>
+        </div>
 
-    
-    <div class="detail">
-            <li class="class1"></li>
-            <li class="class2"></li>
-            <li class="class3"></li>
-            <li class="class4"></li>
-            <li class="class5"></li>
-            <li class="class6"></li>
-            <li class="class7"></li>
-    </div>
+    </section>
 
-    <div class="otherVideo">
-        <ul class="class1"></ul>
-        <ul class="class2"></ul>
-        <ul class="class3"></ul>
-    </div>
+    <section class="otherVideo">
+        <div class="upNext"></div>
+        <ul class="class1">
+            <li>
+                <img src="image/forest.png" alt="">
+                <div>
+                    <div class="title">TEM으로 이미지 측정</div>
+                    <div class="name">DBase</div>
+                    <div class="views">조회수 1M</div>
+                </div>
+                <button><i class="fas fa-ellipsis-v"></i></button>
+            </li>
+            <li>
+                <img src="image/forest.png" alt="">
+                <div>
+                    <div class="title">Youtube 페이지 만들기</div>
+                    <div class="name">DBase</div>
+                    <div class="views">조회수 1M</div>    
+                </div>
+                <button><i class="fas fa-ellipsis-v"></i></button>
+            </li>
+            <li>
+                <img src="image/forest.png" alt="">
+                <div>
+                    <div class="title">플라즈마 프로세스 쓰벌</div>
+                    <div class="name">DBase</div>
+                    <div class="views">조회수 1M</div>
+                </div>
+                <button><i class="fas fa-ellipsis-v"></i></button>
+            </li>
+        </ul>
+    </section>
 
   </body>
 </html>

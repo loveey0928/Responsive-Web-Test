@@ -2,8 +2,35 @@ a {
   text-decoration-line: none;
 }
 
+:root {
+  /* Color */
+  --white-color: #fff;
+  --black-color: #140a00;
+  --blue-color: #045fd4;
+  --red-color: #ff0000;
+  --gret-dark-color: #909090;
+  --grey-light-color: #e0e0e0;
+
+  /* Size */
+  --side-padding: 12px;
+  --avatar-size: 36px;
+
+  /* Font Size */
+  --font-large: 18px;
+  --font-medium: 14px;
+  --font-small: 12px;
+  --font-micro: 10px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: ;
+  list-style: none;
 }
 
 /* ----'------------------'-----navbar---------'------------------------' */
@@ -24,6 +51,10 @@ body {
   padding-left: 10px;
 }
 
+.navbar_logo i {
+  color: red;
+}
+
 .navbar_searchAndMenu {
   font-size: 24px;
   position: absolute;
@@ -35,5 +66,61 @@ body {
 .navbar_searchAndMenu i {
   padding: 4px 8px;
 }
+/* ----'----------------------'--------scene-------------'---------------------------' */
 
-/* ----'------------------'--------------------'------------------------' */
+.scene video {
+  size: 100px;
+}
+
+/* ----'----------------------'--------detail----------'---------------------------' */
+
+.detail {
+  /* padding-left: 0; */
+}
+
+.detail ul {
+  list-style: none;
+  display: flex;
+  padding: 4px 8px;
+}
+
+.detail .hashtag li {
+  padding: 2px 4px;
+  color: rgb(101, 110, 117);
+}
+
+.detail_Title {
+  font-size: 24px;
+  padding-left: 8px;
+}
+
+.detail_moreBtn {
+  position: absolute;
+  right: 30px;
+}
+
+.detail_viewNum li {
+  padding: 1px 4px;
+}
+
+.detail_goodBadEtcBtn li {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 12px;
+  align-items: center;
+}
+
+.detail_goodBadEtcBtn :hover {
+  color: dodgerblue;
+}
+
+.detail_myNameAndSubscribe {
+  display: flex;
+  justify-items: space-between;
+}
+
+.detail_myNameAndSubscribe img {
+  border-radius: 150%;
+}
+
+/* ----'----------------------'--------OtherVideo--------'---------------------------' */

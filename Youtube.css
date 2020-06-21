@@ -29,7 +29,6 @@ a {
 }
 
 body {
-  font-family: ;
   list-style: none;
 }
 
@@ -83,9 +82,9 @@ body {
 
 /* ----'----------------------'--------detail----------'---------------------------' */
 
-.detail {
-  /* padding-left: 0; */
-}
+/* .detail {
+  padding-left: 0;
+} */
 
 .detail ul {
   list-style: none;
@@ -113,6 +112,12 @@ body {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
+}
+
+.detail .detail_Title.fullTitled {
+  font-size: 24px;
+  padding-left: 8px;
+  width: 580px;
 }
 
 .detail_moreBtn {
@@ -169,3 +174,47 @@ body {
 }
 
 /* ----'----------------------'--------OtherVideo--------'---------------------------' */
+
+.otherVideo .upNext {
+  padding-left: var(--side-padding);
+  padding-top: var(--side-padding);
+  padding-bottom: var(--side-padding);
+  color: var(--gret-dark-color);
+}
+
+.otherVideo .class1 li img {
+  flex: 1 1 35%;
+  width: 100px;
+  height: 100px;
+}
+
+.otherVideo .class1 li span {
+  flex: 1 1 60%;
+  padding-left: var(--side-padding);
+}
+
+.otherVideo .class1 li button {
+  flex: 1 1 5%;
+  height: 100%;
+}
+
+.otherVideo .class1 li {
+  display: flex;
+  padding-bottom: 8px;
+  justify-content: space-between;
+  padding-left: var(--side-padding);
+}
+
+@media screen and (min-width: 770px) {
+  .forwide {
+    display: flex;
+  }
+
+  .forwide .detail {
+    flex: 1 1 70%;
+  }
+
+  .forwide .upNext {
+    flex: 1 1 30%;
+  }
+}

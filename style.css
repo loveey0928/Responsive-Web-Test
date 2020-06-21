@@ -1,10 +1,16 @@
+:root {
+  --text-color: #f0f4f5;
+  --backgroun-color: #263343;
+  --accent-color: #d49466;
+}
+
 body {
   margin: 0;
   font-family: Source Sans Pro;
 }
 a {
   text-decoration: none;
-  color: white;
+  color: var(--text-color);
 }
 
 .navbar {
@@ -41,7 +47,7 @@ a {
 }
 
 .navbar_links {
-  color: whitesmoke;
+  color: var(--text-color);
   list-style: none;
   display: flex;
   padding-left: 0%;
@@ -90,5 +96,10 @@ a {
 
   .navbar_toggleBtn {
     display: block;
+  }
+
+  .navbar_menus.active,
+  .navbar_links.active {
+    display: flex;
   }
 }

@@ -9,7 +9,7 @@ a {
   --blue-color: #045fd4;
   --red-color: #ff0000;
   --gret-dark-color: #909090;
-  --grey-light-color: #e0e0e0;
+  --grey-light-color: #e4dede;
 
   /* Size */
   --side-padding: 12px;
@@ -68,8 +68,17 @@ body {
 }
 /* ----'----------------------'--------scene-------------'---------------------------' */
 
+.scene {
+  position: sticky;
+  top: 0;
+  text-align: center;
+  background-color: var(--black-color);
+}
+
 .scene video {
-  size: 100px;
+  width: 100%;
+  height: 100%;
+  max-width: 1000px;
 }
 
 /* ----'----------------------'--------detail----------'---------------------------' */
@@ -86,21 +95,43 @@ body {
 
 .detail .hashtag li {
   padding: 2px 4px;
-  color: rgb(101, 110, 117);
+  color: var(--blue-color);
 }
 
-.detail_Title {
+.detail div div {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.detail .detail_Title {
   font-size: 24px;
   padding-left: 8px;
+  width: 580px;
+  /* 줄 수 제한 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 .detail_moreBtn {
-  position: absolute;
+  position: relative;
   right: 30px;
+  height: 20px;
 }
 
-.detail_viewNum li {
-  padding: 1px 4px;
+.detail_viewNumAndDate li {
+  margin: 1%;
+  padding: 1px 1px;
+}
+
+.detail_goodBadEtcBtn {
+  display: flex;
+  justify-content: space-around;
+  margin: 2%;
+  border-top: 1px solid var(--grey-light-color);
+  border-bottom: 1px solid var(--grey-light-color);
 }
 
 .detail_goodBadEtcBtn li {
@@ -116,11 +147,25 @@ body {
 
 .detail_myNameAndSubscribe {
   display: flex;
-  justify-items: space-between;
+  justify-content: space-between;
+}
+
+.detail_myNameAndSubscribe_metadata {
+  display: flex;
 }
 
 .detail_myNameAndSubscribe img {
-  border-radius: 150%;
+  border-radius: 50%;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  margin-left: 8px;
+}
+
+.detail_myNameAndSubscribe_nameSubscireber {
+  display: flex;
+  flex-direction: column;
+  padding-left: 6px;
+  /* margin: 0 var(--side-padding); */
 }
 
 /* ----'----------------------'--------OtherVideo--------'---------------------------' */

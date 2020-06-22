@@ -107,6 +107,13 @@ body {
   font-size: 24px;
   padding-left: 8px;
   width: 580px;
+}
+
+.detail .detail_Title.clampedTitle {
+  font-size: 24px;
+  padding-left: 8px;
+  width: 580px;
+
   /* 줄 수 제한 */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -114,16 +121,18 @@ body {
   overflow: hidden;
 }
 
-.detail .detail_Title.fullTitled {
-  font-size: 24px;
-  padding-left: 8px;
-  width: 580px;
-}
-
 .detail_moreBtn {
   position: relative;
   right: 30px;
   height: 20px;
+  transition: transform 300ms ease-in-out;
+}
+
+.detail_moreBtn.clicked {
+  position: relative;
+  right: 30px;
+  height: 20px;
+  transform: rotate(-180deg);
 }
 
 .detail_viewNumAndDate li {

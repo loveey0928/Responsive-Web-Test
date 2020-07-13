@@ -6,3 +6,8 @@ toggleBtn.addEventListener('click', () => {
   menu.classList.toggle('active');
   icons.classList.toggle('active');
 });
+
+var multer = require('multer');
+var path = require('path');
+
+const uploader = multer;

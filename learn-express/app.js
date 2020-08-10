@@ -52,4 +52,8 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
+http.createServer(app).listen(3000, function () {
+  console.log('Express 서버가 3000번 포트에서 시작됨.');
+});
+
 module.exports = app;

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="OES_KSP copy.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Nav bar</title>
+    <script
+      src="https://kit.fontawesome.com/57be22e3ca.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="OES_KSP copy.js" defer></script>
+
+    <script type="text/javascript">
+      function SelectWaveLength() {
+        var waveLength1 = document.getElementById('waveLength1');
+        var waveLength2 = document.getElementById('waveLength2');
+        alert(waveLength1.value + ',' + waveLength2.value);
+      }
+    </script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar_logo">
+        <i class="fas fa-atom fa-2x"></i>
+        <a id="mainPageName" href="index.html">SPDRC </a>
+      </div>
+
+      <ul class="navbar_menus">
+        <li><a href="Youtube.html">OES_Lam</a></li>
+        <li><a id="navbar_menu_OES_KSP" href="">OES_KSP</a></li>
+        <li><a href="">RGA</a></li>
+        <li><a href="">TES_EPD</a></li>
+      </ul>
+
+      <ul class="navbar_links">
+        <li><i class="fab fa-twitter"></i></li>
+        <li><i class="fab fa-google"></i></li>
+      </ul>
+
+      <a href="#" class="navbar_toggleBtn">
+        <i class="fas fa-bars"></i>
+      </a>
+    </nav>
+    <div class="body">
+      <div>
+        <img id="electronImage" src="image/전자온도 관련 식.PNG" alt="" />
+      </div>
+      <div class="dataInput">
+        <form class="selectWaveLenth" action="">
+          <span>
+            * 파장 1 :
+            <input
+              id="waveLength1"
+              list="a,b"
+              type="search"
+              placeholder="   Choose waveLength"
+            />
+            nm&nbsp;&nbsp;
+          </span>
+          <span>
+            * 파장 2 :
+            <input
+              id="waveLength2"
+              type="text"
+              placeholder="   Choose waveLength"
+            />
+            nm &nbsp;&nbsp;
+          </span>
+          <input
+            type="button"
+            value="Select WaveLength"
+            onclick="SelectWaveLength();"
+          />
+        </form>
+        <ul>
+          <form
+            action="http://localhost:3000/upload"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            * 읽어 올 CSV 파일 선택 :
+            <input type="file" name="userfile" />&nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- <button id="uploadBtn">업로드</button> -->
+            <input id="fileUploadBtn" type="submit" value="Upload" />
+          </form>
+        </ul>
+      </div>
+      <div class="inputFile"></div>
+      <div class="graph"></div>
+    </div>
+  </body>
+</html>

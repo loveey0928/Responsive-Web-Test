@@ -47,31 +47,61 @@ var UserSchema;
 var UserModel;
 
 //===============데이터 베이스 연결=========================
-var database;
-let db;
-function connectDB() {
-  var databaseUrl = 'mongodb://localhost:27017'; //27017
+// var database;
+// let db;
+// function connectDB() {
+//   var databaseUrl = 'mongodb://localhost:27017'; //27017
 
-  MongoClient.connect(
-    databaseUrl,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    },
-    function (err, client) {
-      if (err) {
-        console.log('데이터베이스 연결 에러 발생');
-        return;
-      }
+//   MongoClient.connect(
+//     databaseUrl,
+//     {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     },
+//     function (err, client) {
+//       if (err) {
+//         console.log('데이터베이스 연결 에러 발생');
+//         return;
+//       }
 
-      console.log('데이터베이스에 연결되었습니다 : ' + databaseUrl);
+//       console.log('데이터베이스에 연결되었습니다 : ' + databaseUrl);
 
-      database = client.db('shopping');
-    }
-  );
-}
+//       database = client.db('shopping');
+//     }
+//   );
+// }
 //=================================================================================
+//==================mongoose 사용======================================================
+function connectDB() {
+  var databaseUrl = 'mongodb://localhost:27017/shopping'; //27017
 
+  mongoose.connect(databaseUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  database = mongoose.connection;
+
+  database.on(
+    'error',
+    console.error.bind(console, 'mongoose connection error')
+  );
+  database.on('open', function () {
+    console.log('데이터베이스에 연결되었습니다. : ' + databaseUrl);
+
+    UserSchema = mongoose.Schema({
+      id: String,
+      name: String,
+      password: String,
+    });
+    console.log('UserSchema 정의함');
+
+    UserModel = mongoose.model('users', UserSchema);
+    console.log('users 정의함');
+  });
+  database.on('disconnected', connectDB);
+}
+//=============================================================================
 var app = express();
 
 // view engine setup

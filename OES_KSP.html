@@ -96,10 +96,9 @@
         );
         var data = await response.text();
         // console.log(data);
-
-        const rows = data.split('\n').slice(2);
-        console.log(rows);
-        var headRow = rows[0].split(',');
+        const table = data.trim().split('\n').slice(2);
+        console.log(table);
+        var headRow = table[0].split(',');
 
         for (var i = 0; i <= headRow.length - 1; i++) {
           if (headRow[i] === wavelength1) {
@@ -109,12 +108,19 @@
           }
         }
 
-        rows.forEach((elt) => {
-          const row = elt.split(',');
-          const headTime = row[0];
-          const headFirstWaveLen = row[firstWaveLen];
-          const headSecondWaveLen = row[secondWaveLen];
+        table.forEach((row) => {
+          const columns = row.split(',');
+          const headTime = columns[0];
+          const headFirstWaveLen = columns[firstWaveLen];
+          const headSecondWaveLen = columns[secondWaveLen];
           console.log(headTime, headFirstWaveLen, headSecondWaveLen);
+
+          // rows.forEach((elt) => {
+          //   const row = elt.split(',');
+          //   const headTime = row[0];
+          //   const headFirstWaveLen = row[firstWaveLen];
+          //   const headSecondWaveLen = row[secondWaveLen];
+          //   console.log(headTime, headFirstWaveLen, headSecondWaveLen);
         });
         // console.log(firstWaveLen);
         // rows[0].forEach((elt) => {

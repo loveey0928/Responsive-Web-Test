@@ -54,7 +54,9 @@ function SelectWaveLength() {
       waveLength2.value +
       ' nm'
   );
-  console.log('sss');
+  console.log('Select WaveLength is done');
+
+  getData();
 }
 
 function mOver() {
@@ -73,15 +75,15 @@ function mOut() {
   // obj.innerHTML = 'Save WaveLength';
 }
 
-fs.createReadStream(__dirname + '/uploads/data.csv')
-  .pipe(
-    parse({
-      delimiter: ',',
-    })
-  )
-  .on('data', function (dataRow) {
-    csvData.push(dataRow);
-  })
-  .on('end', function () {
-    console.log(csvData);
-  });
+// fs.createReadStream(__dirname + '/uploads/data.csv')
+//   .pipe(
+//     parse({
+//       delimiter: ',',
+//     })
+//   )
+//   .on('data', function (dataRow) {
+//     csvData.push(dataRow);
+//   })
+//   .on('end', function () {
+//     console.log(csvData);
+//   });

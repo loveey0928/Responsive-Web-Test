@@ -17,6 +17,33 @@
     <script src="OES_KSP_function.js"></script>
 
     <script type="text/javascript"></script>
+    <script type="text/javascript">
+      async function getData() {
+        // const str = 'The quick brown fox jumps over the lazy dog.';
+        // const words = str.split(' ');
+        // console.log(words);
+        var response = await fetch('/uploads/2020-08-20_150W_120s.f_oes.csv');
+        var data = await response.text();
+        // console.log(data);
+
+        const rows = data.split('\n').slice(2);
+        console.log(rows);
+        row[0].forEach((elt) => {
+          wave;
+        });
+        rows.forEach((elt) => {
+          const row = elt.split(',');
+          const time = row[0];
+          const waveLen1 = row[wave];
+        });
+        // var rowFilteredData = '';
+        // for (var i = 2; i < rows.length; i++) {
+        //   // console.log(rows[i]);
+        //   rowFilteredData += rows[i] + '\n';
+        // }
+        // console.log(rowFilteredData);
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar">

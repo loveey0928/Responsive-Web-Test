@@ -87,19 +87,51 @@
         // const str = 'The quick brown fox jumps over the lazy dog.';
         // const words = str.split(' ');
         // console.log(words);
+        var wavelength1 = '162.403';
+        var wavelength2 = '162.998';
+        var firstWaveLen;
+        var secondWaveLen;
         var response = await fetch(
           '/uploads/2020-06-12_15h45m38s_test5_1_0__condition changed and temp 650.f_oes.csv'
         );
         var data = await response.text();
         // console.log(data);
 
-        const rows = data.split('\n');
-        var rowFilteredData = '';
-        for (var i = 2; i < rows.length; i++) {
-          // console.log(rows[i]);
-          rowFilteredData += rows[i] + '\n';
+        const rows = data.split('\n').slice(2);
+        console.log(rows);
+        var headRow = rows[0].split(',');
+
+        for (var i = 0; i <= headRow.length - 1; i++) {
+          if (headRow[i] === wavelength1) {
+            firstWaveLen = i;
+          } else if (headRow[i] === wavelength2) {
+            secondWaveLen = i;
+          }
         }
-        console.log(rowFilteredData);
+
+        rows.forEach((elt) => {
+          const row = elt.split(',');
+          const headTime = row[0];
+          const headFirstWaveLen = row[firstWaveLen];
+          const headSecondWaveLen = row[secondWaveLen];
+          console.log(headTime, headFirstWaveLen, headSecondWaveLen);
+        });
+        // console.log(firstWaveLen);
+        // rows[0].forEach((elt) => {
+        //   const row = elt.split(',');
+        //   console.log(row);
+        // });
+        // rows.forEach(elt => {
+        //   const row = elt.split(',');
+        //   const time = row[0];
+        //   const waveLen1 = row[wave]
+        // });
+        // var rowFilteredData = '';
+        // for (var i = 2; i < rows.length; i++) {
+        //   // console.log(rows[i]);
+        //   rowFilteredData += rows[i] + '\n';
+        // }
+        // console.log(rowFilteredData);
       }
     </script>
   </body>

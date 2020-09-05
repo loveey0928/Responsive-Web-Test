@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
     <link rel="stylesheet" href="OES_KSP.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap"
@@ -13,10 +14,18 @@
       src="https://kit.fontawesome.com/57be22e3ca.js"
       crossorigin="anonymous"
     ></script>
-    <script src="OES_KSP.js" defer></script>
+    <!-- <script src="OES_KSP.js" defer></script> -->
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+    </style>
   </head>
   <body>
-    <nav class="navbar">
+    <!-- <nav class="navbar">
       <div class="navbar_logo">
         <i class="fas fa-atom fa-2x"></i>
         <a id="mainPageName" href="index.html">SPDRC </a>
@@ -61,13 +70,37 @@
           >
             * 읽어 올 CSV 파일 선택 :
             <input type="file" name="userfile" />
-            <!-- <button id="uploadBtn">업로드</button> -->
             <input type="submit" value="Upload" />
           </form>
         </ul>
       </div>
       <div class="inputFile"></div>
       <div class="graph"></div>
-    </div>
+    </div> -->
+
+    <!-- <input type="button" onclick="getData()" value="butt"> -->
+
+    <script type="text/javascript">
+      getData();
+
+      async function getData() {
+        // const str = 'The quick brown fox jumps over the lazy dog.';
+        // const words = str.split(' ');
+        // console.log(words);
+        var response = await fetch(
+          '/uploads/2020-06-12_15h45m38s_test5_1_0__condition changed and temp 650.f_oes.csv'
+        );
+        var data = await response.text();
+        // console.log(data);
+
+        const rows = data.split('\n');
+        var rowFilteredData = '';
+        for (var i = 2; i < rows.length; i++) {
+          // console.log(rows[i]);
+          rowFilteredData += rows[i] + '\n';
+        }
+        console.log(rowFilteredData);
+      }
+    </script>
   </body>
 </html>

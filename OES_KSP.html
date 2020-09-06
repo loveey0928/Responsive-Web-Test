@@ -15,6 +15,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- <script src="OES_KSP.js" defer></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <style>
       table,
       th,
@@ -81,8 +82,6 @@
     <!-- <input type="button" onclick="getData()" value="butt"> -->
 
     <script type="text/javascript">
-      getData();
-
       async function getData() {
         // const str = 'The quick brown fox jumps over the lazy dog.';
         // const words = str.split(' ');
@@ -91,9 +90,7 @@
         var wavelength2 = '162.998';
         var firstWaveLen;
         var secondWaveLen;
-        var response = await fetch(
-          '/uploads/2020-06-12_15h45m38s_test5_1_0__condition changed and temp 650.f_oes.csv'
-        );
+        var response = await fetch('/uploads/data.csv');
         var data = await response.text();
         // console.log(data);
         const table = data.trim().split('\n').slice(2);
@@ -107,13 +104,24 @@
             secondWaveLen = i;
           }
         }
-
+        var i = 0;
         table.forEach((row) => {
           const columns = row.split(',');
+
           const headTime = columns[0];
-          const headFirstWaveLen = columns[firstWaveLen];
-          const headSecondWaveLen = columns[secondWaveLen];
-          console.log(headTime, headFirstWaveLen, headSecondWaveLen);
+          const headFirstWaveLen = columns[1];
+          // const headSecondWaveLen = columns[secondWaveLen];
+          console.log(headTime, headFirstWaveLen);
+          //console.log(headTime, headFirstWaveLen, headSecondWaveLen);
+
+          if (i === 0) {
+          } else {
+            timelabels.push(headTime);
+            waveLenLabels1.push(headFirstWaveLen);
+            //waveLenLabels2.push(headSecondWaveLen);
+          }
+
+          i++;
 
           // rows.forEach((elt) => {
           //   const row = elt.split(',');
@@ -138,6 +146,61 @@
         //   rowFilteredData += rows[i] + '\n';
         // }
         // console.log(rowFilteredData);
+      }
+    </script>
+
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <script>
+      const timelabels = [];
+      const waveLenLabels1 = [];
+      const waveLenLabels2 = [];
+
+      chartIt();
+
+      async function chartIt() {
+        await getData();
+        const ctx = document.getElementById('myChart');
+        const myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: timelabels,
+            datasets: [
+              {
+                label: 'Intensity',
+                data: waveLenLabels1,
+                backgroundColor: [
+                  //'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  // 'rgba(255, 206, 86, 0.2)',
+                  // 'rgba(75, 192, 192, 0.2)',
+                  // 'rgba(153, 102, 255, 0.2)',
+                  // 'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                  //'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  // 'rgba(255, 206, 86, 1)',
+                  // 'rgba(75, 192, 192, 1)',
+                  // 'rgba(153, 102, 255, 1)',
+                  // 'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 1,
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          },
+        });
       }
     </script>
   </body>

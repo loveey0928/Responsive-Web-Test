@@ -108,6 +108,7 @@
           }
         }
         var i = 0;
+        var j = 1;
         var headTImeBefore = 'input_garbage_value';
         var addNum = 1;
 
@@ -122,16 +123,24 @@
           if (i === 0) {
           } else {
             if (headTime === headTImeBefore) {
-              timelabels.push(headTime + '_' + addNum);
-              waveLenLabels1.push(parseInt(headFirstWaveLen) - 2000);
-              waveLenLabels2.push(parseInt(headSecondWaveLen) - 2000);
-              parseInt;
-              addNum++;
+              if (j < 10) {
+                timelabels.push(headTime + '_0' + addNum);
+                waveLenLabels1.push(parseInt(headFirstWaveLen) - 2000);
+                waveLenLabels2.push(parseInt(headSecondWaveLen) - 2000);
+                addNum++;
+                j++;
+              } else {
+                timelabels.push(headTime + '_' + addNum);
+                waveLenLabels1.push(parseInt(headFirstWaveLen) - 2000);
+                waveLenLabels2.push(parseInt(headSecondWaveLen) - 2000);
+                addNum++;
+              }
             } else {
               timelabels.push(headTime + '_' + '00');
               waveLenLabels1.push(parseInt(headFirstWaveLen) - 2000);
               waveLenLabels2.push(parseInt(headSecondWaveLen) - 2000);
               addNum = 1;
+              j = 1;
             }
           }
           headTImeBefore = columns[0];
@@ -161,7 +170,7 @@
     </script>
 
     <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
-    <div id="myChart" style="width: 1700px; height: 1000px"></div>
+    <div id="myChart" style="width: 1500px; height: 800px"></div>
     <script>
       const timelabels = [];
       const waveLenLabels1 = [];

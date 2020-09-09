@@ -25,6 +25,7 @@ app.listen(port, function () {
   console.log('server on! http://localhost:' + port);
 });
 
+var userfile = '';
 app.post('/upload', function (req, res) {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');
@@ -32,12 +33,12 @@ app.post('/upload', function (req, res) {
 
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   //var sampleFile = req.files.sampleFile;
-  var userfile = req.files.userfile;
+  userfile = req.files.userfile;
   // Use the mv() method to place the file somewhere on your server
   userfile.mv('uploads/' + userfile.name, function (err) {
     if (err) return res.status(500).send(err);
 
-    res.send('File uploaded!');
+    res.send(userfile.name + ' File uploaded!');
     console.log('File uploaded successively');
   });
 });

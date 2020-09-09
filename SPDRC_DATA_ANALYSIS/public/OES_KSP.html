@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./stylesheets/OES_KSP.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <title>SPDRC DATA ANALYSIS</title>
+    <script
+      src="https://kit.fontawesome.com/57be22e3ca.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../app.js" defer></script>
+    <script src="OES_KSP_function.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- <script type="text/javascript"></script> -->
+    <script type="text/javascript">
+      function SelectWaveLength() {
+        waveLength1 = document.getElementById('waveLength1');
+        waveLength2 = document.getElementById('waveLength2');
+        alert(
+          'waveLength 1 : ' +
+            waveLength1.value +
+            ' nm' +
+            '\n' +
+            'waveLength 2 : ' +
+            waveLength2.value +
+            ' nm'
+        );
+        console.log('Select WaveLength is done');
+      }
+
+      function mOver() {
+        waveLengthBtn = document.getElementById('waveLengthBtn');
+        waveLengthBtn.value = 'Click !!!!!!!!!!!!!!!!!!!!!!!!';
+        waveLengthBtn.style.backgroundColor = '#e1f5fe';
+        waveLengthBtn.style.borderColor = '#039be5';
+        // obj.innerHTML = 'Click !!!!!!!!!!!';
+      }
+
+      function mOut() {
+        waveLengthBtn = document.getElementById('waveLengthBtn');
+        waveLengthBtn.value = 'Save WaveLength';
+        waveLengthBtn.style.backgroundColor = '#e0e0e0';
+        waveLengthBtn.style.borderColor = 'black';
+        // obj.innerHTML = 'Save WaveLength';
+      }
+
+      async function getData() {
+        var wavelength1 = waveLength1.value;
+        var wavelength2 = waveLength2.value;
+        // 162.403 ,  162.998
+        var firstWaveLen;
+        var secondWaveLen;
+        var response = await fetch(
+          '/uploads/2020-06-12_15h45m38s_test5_1_0__condition changed and temp 650.f_oes.csv'
+        );
+        var data = await response.text();
+        // console.log(data);
+        const table = data.trim().split('\n').slice(2);
+        console.log(table);
+        var headRow = table[0].split(',');
+
+        for (var i = 0; i <= headRow.length - 1; i++) {
+          if (headRow[i] === wavelength1) {
+            firstWaveLen = i;
+          } else if (headRow[i] === wavelength2) {
+            secondWaveLen = i;
+          }
+        }
+        var i = 0;
+        var j = 1;
+        var headTImeBefore = 'input_garbage_value';
+        var addNum = 1;
+
+        table.forEach((row) => {
+          const columns = row.split(',');
+
+          const headTime = columns[0];
+          const headFirstWaveLen = columns[firstWaveLen];
+          const headSecondWaveLen = columns[secondWaveLen];
+          console.log(headTime, headFirstWaveLen, headSecondWaveLen);
+
+          if (i === 0) {
+          } else {
+            if (headTime === headTImeBefore) {
+              if (j < 10) {
+                timelabels.push(headTime + '_0' + addNum);
+                waveLenLabels1.push(parseInt(headFirstWaveLen) - 2000);
+                waveLenLabels2.push(parseInt(headSecondWaveLen) - 2000);
+                addNum++;
+                j++;
+              } else {
+                timelabels.push(headTime + '_' + addNum);
+                waveLenLabels1.push(parseInt(headFirstWaveLen) - 2000);
+                waveLenLabels2.push(parseInt(headSecondWaveLen) - 2000);
+                addNum++;
+              }
+            } else {
+              timelabels.push(headTime + '_' + '00');
+              waveLenLabels1.push(parseInt(headFirstWaveLen) - 2000);
+              waveLenLabels2.push(parseInt(headSecondWaveLen) - 2000);
+              addNum = 1;
+              j = 1;
+            }
+          }
+          headTImeBefore = columns[0];
+          i++;
+        });
+      }
+
+      const timelabels = [];
+      const waveLenLabels1 = [];
+      const waveLenLabels2 = [];
+
+      // ChartPlotly();
+
+      async function ChartPlotly() {
+        await getData();
+        MYCHART = document.getElementById('myChart');
+        Plotly.newPlot(
+          MYCHART,
+          [
+            {
+              x: timelabels,
+              y: waveLenLabels1,
+            },
+          ],
+          {
+            margin: { t: 0 },
+          }
+        );
+      }
+
+      function DrawGraph() {
+        // const timelabels = [];
+        // const waveLenLabels1 = [];
+        // const waveLenLabels2 = [];
+
+        ChartPlotly();
+      }
+    </script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar_logo">
+        <i class="fas fa-atom fa-2x"></i>
+        <a id="mainPageName" href="index.html">SPDRC </a>
+      </div>
+
+      <ul class="navbar_menus">
+        <li><a href="Youtube.html">OES_Lam</a></li>
+        <li><a id="navbar_menu_OES_KSP" href="">OES_KSP</a></li>
+        <li><a href="">RGA</a></li>
+        <li><a href="">TES_EPD</a></li>
+      </ul>
+
+      <ul class="navbar_links">
+        <li><i class="fab fa-twitter"></i></li>
+        <li><i class="fab fa-google"></i></li>
+      </ul>
+
+      <a href="#" class="navbar_toggleBtn">
+        <i class="fas fa-bars"></i>
+      </a>
+    </nav>
+    <div class="body">
+      <br />
+      <div>
+        <img id="electronImage" src="images/전자온도 관련 식.PNG" alt="" />
+      </div>
+      <div class="dataInput">
+        <form
+          id="csvRead"
+          method="post"
+          action="/upload/csv"
+          enctype="multipart/form-data"
+        >
+          * 분석이 필요한 CSV 파일 선택 :
+          <input type="file" name="userfile" />&nbsp;&nbsp;&nbsp;&nbsp;
+          <!-- <button id="uploadBtn">업로드</button> -->
+          <input id="fileUploadBtn" type="submit" value="Upload" />
+        </form>
+        <form
+          class="selectWaveLenth"
+          method="post"
+          action="/uploads/wavelength"
+          autocomplete="on"
+        >
+          <span>
+            * 파장 1 :
+            <input
+              id="waveLength1"
+              type="text"
+              placeholder="   Choose waveLength"
+              autofocus
+            />
+            nm&nbsp;&nbsp;
+          </span>
+          <span>
+            * 파장 2 :
+            <input
+              id="waveLength2"
+              type="text"
+              placeholder="   Choose waveLength"
+              autofocus
+            />
+            nm &nbsp;&nbsp;
+          </span>
+          <input
+            id="waveLengthBtn"
+            type="button"
+            value="Save WaveLength"
+            onmouseover="mOver()"
+            onmouseout="mOut()"
+            onclick="SelectWaveLength();"
+          />
+          &nbsp;&nbsp;→
+          <input
+            id="drawGraph"
+            type="button"
+            value="drawGraph"
+            onclick="DrawGraph();"
+          />
+        </form>
+
+        <hr />
+      </div>
+      <div id="myChart" style="width: 1500px; height: 800px"></div>
+    </div>
+    <div></div>
+  </body>
+</html>

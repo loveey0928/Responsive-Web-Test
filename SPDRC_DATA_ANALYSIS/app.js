@@ -49,12 +49,13 @@ app.post('/upload/csv', function (req, res) {
   userfile.mv('uploads/' + userfile.name, function (err) {
     if (err) return res.status(500).send(err);
 
-    res.send(userfile.name + ' File uploaded!');
+    res.send(userfile.name + '  File uploaded!');
     console.log('File uploaded successively');
   });
 });
 
-var port = 3000;
+//var port = 3000;
+var port = process.env.PORT || 3000;
 app.listen(port, function () {
   console.log('server on! http://localhost:' + port);
 });

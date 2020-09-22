@@ -56,12 +56,10 @@
         // 162.403 ,  162.998
         var firstWaveLen;
         var secondWaveLen;
-        var response = await fetch(
-          '/uploads/2020-06-12_15h45m38s_test5_1_0__condition changed and temp 650.f_oes.csv'
-        );
+        var response = await fetch('/uploads/' + fileName.files.item(0).name);
         var data = await response.text();
         // console.log(data);
-        const table = data.trim().split('\n').slice(2);
+        const table = data.trim().split('\n').slice(2); // 3번째 행부터 읽어옴
         console.log(table);
         var headRow = table[0].split(',');
 
@@ -143,6 +141,12 @@
 
         ChartPlotly();
       }
+
+      var fileName;
+      function GetFileName() {
+        fileName = document.getElementById('fileInput');
+        //alert('Selected file: ' + fileName.files.item(0).name);
+      }
     </script>
   </head>
   <body>
@@ -181,7 +185,12 @@
           enctype="multipart/form-data"
         >
           * 분석이 필요한 CSV 파일 선택 :
-          <input type="file" name="userfile" />&nbsp;&nbsp;&nbsp;&nbsp;
+          <input
+            type="file"
+            id="fileInput"
+            name="userfile"
+            onchange="GetFileName()"
+          />&nbsp;&nbsp;&nbsp;&nbsp;
           <!-- <button id="uploadBtn">업로드</button> -->
           <input id="fileUploadBtn" type="submit" value="Upload" />
         </form>

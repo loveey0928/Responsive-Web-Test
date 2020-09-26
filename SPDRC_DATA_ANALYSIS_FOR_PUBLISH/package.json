@@ -1,0 +1,36 @@
+{
+  "name": "spdrc",
+  "version": "1.0.0",
+  "description": "about analysis tool for spdrc",
+  "main": "OES_KSP.js",
+  "dependencies": {
+    "async": "^3.2.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "csv": "^5.3.2",
+    "csv-parse": "^4.12.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.4",
+    "jshint": "^2.11.1",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo/ \"Error: no test specified/\" && exit 1\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loveey0928/Responsive-Web-Test.git"
+  },
+  "keywords": [
+    "spdrc"
+  ],
+  "author": "Joon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loveey0928/Responsive-Web-Test/issues"
+  },
+  "homepage": "https://github.com/loveey0928/Responsive-Web-Test#readme"
+}

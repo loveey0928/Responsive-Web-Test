@@ -1,3 +1,16 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./SPDRC_DATA_ANALYSIS",
+        "-p",
+        "*test*.py"
+    ],
+    "python.testing.pytestEnabled": true,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "SPDRC_DATA_ANALYSIS"
+    ]
 }

@@ -6,25 +6,45 @@ var app = express();
 
 var mysql = require('mysql');
 
-var i = 1;
+var i = 0;
+var dbReceived = '';
 
-// var con = mysql.createConnection({
+var emailParam = {
+  toEmail: 'hjkwon0928@naver.com',
+  //   subject: '나는 나를 믿는다.',
+  // subject: famousSaying[i],
+  subject: dbReceived,
+  text: '메일 보내기 성공 \n이히히히히\n잘돼네',
+};
+
+// var pool = mysql.createPool({
+//   connectionLimit: 10000000000000,
 //   host: 'localhost',
-//   //   post: 3306,
+//   //   port: 3306,
 //   user: 'root',
 //   password: '@khj70701004',
 //   database: 'nodejs',
 // });
 
-// con.connect(function (err) {
+// pool.getConnection(function (err, connection) {
 //   if (err) throw err;
-//   con.query(
+//   connection.query(
 //     'SELECT famous_saying FROM famoussaying where num=' + i,
-//     function (err, result, fields) {
-//       if (err) throw err;
-//       console.log(result[0].famous_saying);
+//     function (error, results, fields) {
+//       connection.release();
+//       if (error) throw error;
+//       dbReceived = results[0].famous_saying;
+//       console.log(dbReceived);
 //     }
 //   );
+// });
+
+// var connection = mysql.createConnection({
+//   host: 'localhost',
+//   //   post: 3306,
+//   user: 'root',
+//   password: '@khj70701004',
+//   database: 'nodejs',
 // });
 
 // router.get('/', function (req, res, next) {
@@ -73,15 +93,74 @@ var famousSaying = [
 
 // 5초 간격으로 실행되는게 아닌 5초에 실행한다.
 var j = schedule.scheduleJob('5 * * * * *', function () {
-  var i = Math.floor(Math.random() * 100) % 3;
+  var i = (Math.floor(Math.random() * 100) % 3) + 1;
   console.log(i);
-  var emailParam = {
-    toEmail: 'hjkwon0928@naver.com',
-    //   subject: '나는 나를 믿는다.',
-    subject: famousSaying[i],
-    text: '메일 보내기 성공 \n이히히히히\n잘돼네',
-  };
-  mailSender.sendGmail(emailParam);
+
+  //   // var connection = mysql.createConnection({
+  //   //   host: 'localhost',
+  //   //   //   port: 3306,
+  //   //   user: 'root',
+  //   //   password: '@khj70701004',
+  //   //   database: 'nodejs',
+  //   // });
+  //   // connection.connect(function (err) {
+  //   //   if (err) throw err;
+  //   //   connection.query(
+  //   //     'SELECT famous_saying FROM famoussaying where num=' + i,
+  //   //     function (err, result, fields) {
+  //   //       if (err) throw err;
+  //   //       dbReceived = result[0].famous_saying;
+  //   //       console.log(dbReceived);
+  //   //     }
+  //   //   );
+  //   //   connection.end();
+  //   // });
+  var pool = mysql.createPool({
+    connectionLimit: 10000000000000,
+    host: 'localhost',
+    //   port: 3306,
+    user: 'root',
+    password: '@khj70701004',
+    database: 'nodejs',
+  });
+
+  pool.getConnection(function (err, connection) {
+    if (err) throw err;
+    connection.query(
+      'SELECT famous_saying FROM famoussaying where num=' + i,
+      function (error, results, fields) {
+        connection.release();
+        if (error) throw error;
+        new Promise((resolve, reject) => {
+          dbReceived = results[0].famous_saying;
+          resolve();
+        })
+          .then(() => {
+            emailParam = {
+              toEmail: 'hjkwon0928@naver.com',
+              //   subject: '나는 나를 믿는다.',
+              // subject: famousSaying[i],
+              subject: dbReceived,
+              text: '메일 보내기 성공 \n이히히히히\n잘돼네',
+            };
+          })
+          .then(() => {
+            console.log(dbReceived);
+            mailSender.sendGmail(emailParam);
+          });
+      }
+    );
+  });
+
+  // var emailParam = {
+  //   toEmail: 'hjkwon0928@naver.com',
+  //   //   subject: '나는 나를 믿는다.',
+  //   // subject: famousSaying[i],
+  //   subject: dbReceived,
+  //   text: '메일 보내기 성공 \n이히히히히\n잘돼네',
+  // };
+  // console.log(dbReceived);
+  // mailSender.sendGmail(emailParam);
   //   console.log("매분 5초마다 등장");
 });
 
